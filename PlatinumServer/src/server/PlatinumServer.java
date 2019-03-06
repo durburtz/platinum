@@ -16,7 +16,7 @@ public class PlatinumServer {
 	public static void main(String[] args) {
 
 		if (args.length != 2) {
-			System.err.println("Please enter in the Terminal: java Carido <host> <port>");
+			System.err.println("Please enter in the Terminal: java PlatinumServer <host> <port>");
 			System.exit(1);
 		}
 
