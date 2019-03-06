@@ -9,7 +9,6 @@ import java.util.concurrent.Executors;
 
 public class PlatinumServer {
 	
-
 	ServerSocket ss;
 	ServerThread st;
 	public boolean shouldRun = true; // boolean used to control run() method

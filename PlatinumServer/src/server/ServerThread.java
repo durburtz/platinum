@@ -7,6 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import util.Message;
+
 /**
  * @author peter
  *
@@ -45,9 +47,12 @@ public class ServerThread implements Runnable {
 				e.printStackTrace();
 			}
 
-			if (readMessage != null) {
+			if (castMessage != null) {
 
-				// get coords
+				String msgHeader = castMessage.getHeader();
+				if (msgHeader.equals("Draw")) {
+					System.out.println("Client sent coords: " + castMessage.getX() + " " + castMessage.getY()+".");
+				}
 
 			}
 
