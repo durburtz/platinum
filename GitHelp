@@ -1,0 +1,34 @@
+Git Help: 
+
+To avoid happy accidents, cd to platinum directory:
+git gui
+
+Unstaged changes = changes that will not be committed
+Staged changes = changes that will be committed
+
+Then add a commit message, click commit button. The click push button and select the branch.
+
+
+Git commandline:
+
+To see what files you have modified / what branch you are on:
+git status 
+
+To retrive all recent changes on remote:
+git pull
+
+To add local changes to remote:
+git add .
+git commit -m "message here"
+git push
+
+To switch branch:
+git checkout branchName
+
+To create new local branch: 
+git checkout -b newBranchName
+
+To push local branch to remote: 
+git push -u origin newBranchName
+
+
