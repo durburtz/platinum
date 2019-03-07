@@ -29,11 +29,7 @@ public class PlatinumClient {
 			toServer = new ObjectOutputStream(socket.getOutputStream());
 			fromServer = new ObjectInputStream(socket.getInputStream());
 			toServer.flush();
-			
-			Message message = new Message("Draw", socket.getInetAddress().toString(), "reee", "ree");
-			
-			toServer.writeObject(message);
-			toServer.flush();
+
 			
 			System.out.println("Connected!");
 
