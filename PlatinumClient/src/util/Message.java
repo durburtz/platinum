@@ -11,7 +11,7 @@ public class Message implements Serializable {
 	private String y; // y coord
 	private Object object;  // any additional information that needs attaching
 	
-	public Message(String header, String message, Object object) {
+	public Message(String header, String x, String y, Object object) {
 		super();
 		this.header = header;
 		this.x = x;

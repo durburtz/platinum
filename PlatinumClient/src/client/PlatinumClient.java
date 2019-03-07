@@ -5,11 +5,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import util.Message;
+
+
 public class PlatinumClient {
 
-	public ObjectOutputStream toServer;
-	public ObjectInputStream fromServer;
-	public Socket socket;
+	private ObjectOutputStream toServer;
+	private ObjectInputStream fromServer;
+	private Socket socket;
 
 	public PlatinumClient() {
 
@@ -25,7 +28,10 @@ public class PlatinumClient {
 			toServer = new ObjectOutputStream(socket.getOutputStream());
 			fromServer = new ObjectInputStream(socket.getInputStream());
 			toServer.flush();
-			toServer.writeObject("REEEE");
+			
+			Message message = new Message("Draw", "Re", "reee", "ree");
+			
+			toServer.writeObject(message);
 			toServer.flush();
 			
 			System.out.println("Connected!");

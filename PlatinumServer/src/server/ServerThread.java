@@ -48,10 +48,11 @@ public class ServerThread implements Runnable {
 			}
 
 			if (castMessage != null) {
-
-				String msgHeader = castMessage.getHeader();
+				
+				Message recievedMessage = castMessage;
+				String msgHeader = recievedMessage.getHeader();
 				if (msgHeader.equals("Draw")) {
-					System.out.println("Client sent coords: " + castMessage.getX() + " " + castMessage.getY()+".");
+					System.out.println("Client sent coords: " + recievedMessage.getX() + " " + recievedMessage.getY()+".");
 				}
 
 			}
