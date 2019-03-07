@@ -1,7 +1,5 @@
 package server;
 
-import java.awt.Graphics;
-import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -21,7 +19,6 @@ public class ServerThread implements Runnable {
 	Object readMessage;
 	Message castMessage;
 
-
 	public ServerThread(Socket cs, PlatinumServer server) {
 		this.cs = cs;
 		this.server = server;
@@ -34,30 +31,39 @@ public class ServerThread implements Runnable {
 
 			ObjectInputStream fromClient = new ObjectInputStream(cs.getInputStream());
 			ObjectOutputStream toClient = new ObjectOutputStream(cs.getOutputStream());
-			
-			try {
 
-				System.out.println("Waiting for a message from " + cs.getInetAddress().toString());
-				readMessage = (fromClient.readObject());
-				System.out.println("Recieved a new message from " + cs.getInetAddress().toString());
-				castMessage = (Message) readMessage;
+			while (true) {
 
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
+				try {
 
-			if (castMessage != null) {
-				
-				Message recievedMessage = castMessage;
-				String msgHeader = recievedMessage.getHeader();
-				if (msgHeader.equals("Draw")) {
-					System.out.println(cs.getInetAddress().toString() + " sent coords: " + recievedMessage.getX() + " " + recievedMessage.getY()+".");
+					System.out.println("Waiting for a message from " + cs.getInetAddress().toString());
+					readMessage = (fromClient.readObject());
+					castMessage = (Message) readMessage;
+
+				} catch (ClassNotFoundException e) {
+
 				}
 
+				if (readMessage != null) {
+
+					Message recievedMessage = castMessage;
+					String msgHeader = recievedMessage.getHeader();
+					if (msgHeader.equals("Draw")) {
+						System.out.println(cs.getInetAddress().toString() + " sent coords: " + recievedMessage.getX()
+								+ " " + recievedMessage.getY() + ".");
+					}
+
+				}
 			}
 
-		} catch (IOException e) {
+		}
+
+		catch (
+
+		IOException e) {
 			e.printStackTrace();
+		} finally {
+			// struff
 		}
 
 	}

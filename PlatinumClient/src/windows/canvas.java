@@ -1,7 +1,5 @@
 package windows;
 
-import java.io.IOException;
-
 import client.PlatinumClient;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
