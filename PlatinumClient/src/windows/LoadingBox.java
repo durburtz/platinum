@@ -35,7 +35,7 @@ public class LoadingBox extends Application {
 
 					if (client.isConnected()) {
 
-						primaryStage.setScene(new canvas(1280, 750).getScene());
+						primaryStage.setScene(new canvas(1280, 750, client).getScene());
 					}
 				}
 				catch (Exception ex) {

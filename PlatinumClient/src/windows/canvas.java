@@ -11,25 +11,24 @@ import util.Message;
 
 public class canvas {
 	private Scene canvasScene;
-	private PlatinumClient client;
+	private PlatinumClient pc;
 
-	public canvas(int x, int y) {
+	public canvas(int x, int y, PlatinumClient pc) {
 		Pane canvasPane = new Pane();
 		canvasScene = new Scene(canvasPane, x, y);
-
+		this.pc = pc;
 		canvasScene.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
-				System.out.println("X poss: " + mouseEvent.getX() + "Y poss:" + mouseEvent.getY());
-				
+
 				Message m = new Message("Draw", Double.toString(mouseEvent.getX()), Double.toString(mouseEvent.getY()),
 						"ree");
-				
+
 				try {
-					client.getOutputStream().writeObject(m);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					pc.getOutputStream().writeObject(m);
+					pc.getOutputStream().flush();
+				} catch (Exception ex) {
+					ex.printStackTrace();
 				}
 
 			}
