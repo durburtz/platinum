@@ -25,7 +25,7 @@ public class PlatinumClient {
 			toServer = new ObjectOutputStream(socket.getOutputStream());
 			fromServer = new ObjectInputStream(socket.getInputStream());
 			toServer.flush();
-			
+
 			System.out.println("Connected!");
 
 			return true;
@@ -36,7 +36,5 @@ public class PlatinumClient {
 
 		}
 	}
-	
-	
 
 }
