@@ -48,7 +48,7 @@ public class PlatinumServer {
 			
 				ExecutorService threadPool = Executors.newCachedThreadPool();
 				Socket cs = ss.accept();
-				System.out.println("New connection to the server");
+				System.out.println("New connection to the server from " + cs.getInetAddress().toString());
 				ServerThread pt = new ServerThread(cs, this);
 				threadPool.execute(pt);
 

@@ -30,7 +30,11 @@ public class LoadingBox extends Application {
 			// connection event
 			public void handle(ActionEvent event) {
 				client.connect("127.0.0.1", 1098);
-				
+
+				if (client.isConnected()) {
+					// switch windows to the big window (and close this one)
+				}
+
 			}
 		});
 

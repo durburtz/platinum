@@ -34,13 +34,12 @@ public class ServerThread implements Runnable {
 
 			ObjectInputStream fromClient = new ObjectInputStream(cs.getInputStream());
 			ObjectOutputStream toClient = new ObjectOutputStream(cs.getOutputStream());
-
-			System.out.println("Established IO streams - running player thread");
-
+			
 			try {
 
+				System.out.println("Waiting for a message from " + cs.getInetAddress().toString());
 				readMessage = (fromClient.readObject());
-				System.out.println("recieved a new message");
+				System.out.println("Recieved a new message from " + cs.getInetAddress().toString());
 				castMessage = (Message) readMessage;
 
 			} catch (ClassNotFoundException e) {
@@ -52,7 +51,7 @@ public class ServerThread implements Runnable {
 				Message recievedMessage = castMessage;
 				String msgHeader = recievedMessage.getHeader();
 				if (msgHeader.equals("Draw")) {
-					System.out.println("Client sent coords: " + recievedMessage.getX() + " " + recievedMessage.getY()+".");
+					System.out.println(cs.getInetAddress().toString() + " sent coords: " + recievedMessage.getX() + " " + recievedMessage.getY()+".");
 				}
 
 			}

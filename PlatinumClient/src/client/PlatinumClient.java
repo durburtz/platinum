@@ -13,6 +13,7 @@ public class PlatinumClient {
 	private ObjectOutputStream toServer;
 	private ObjectInputStream fromServer;
 	private Socket socket;
+	private boolean isConnected = false;
 
 	public PlatinumClient() {
 
@@ -24,12 +25,13 @@ public class PlatinumClient {
 
 			socket = new Socket(IP, port);
 			System.out.println("Connected to host");
+			isConnected = true;
 
 			toServer = new ObjectOutputStream(socket.getOutputStream());
 			fromServer = new ObjectInputStream(socket.getInputStream());
 			toServer.flush();
 			
-			Message message = new Message("Draw", "Re", "reee", "ree");
+			Message message = new Message("Draw", socket.getInetAddress().toString(), "reee", "ree");
 			
 			toServer.writeObject(message);
 			toServer.flush();
@@ -43,6 +45,10 @@ public class PlatinumClient {
 			return false;
 
 		}
+	}
+	
+	public boolean isConnected(){
+		return isConnected;
 	}
 
 }
