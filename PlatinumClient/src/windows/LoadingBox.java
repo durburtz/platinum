@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+
 /**
  *
  * @author Tom
@@ -29,11 +30,18 @@ public class LoadingBox extends Application {
 			@Override
 			// connection event
 			public void handle(ActionEvent event) {
-				client.connect("127.0.0.1", 1098);
+				try {
+					client.connect("127.0.0.1", 1098);
 
-				if (client.isConnected()) {
-					// switch windows to the big window (and close this one)
+					if (client.isConnected()) {
+
+						primaryStage.setScene(new canvas(1280, 750).getScene());
+					}
 				}
+				catch (Exception ex) {
+					//ex.printStackTrace("Connection to the Server failed...");
+				}
+				
 
 			}
 		});
@@ -45,10 +53,11 @@ public class LoadingBox extends Application {
 		btn.relocate(190, 180);
 		connectLabel.relocate(160, 160);
 
-		Scene scene = new Scene(topLayer, 400, 400);
-
+		Scene startScene = new Scene(topLayer, 400, 400);
+		
+		
 		primaryStage.setTitle("Plat lads");
-		primaryStage.setScene(scene);
+		primaryStage.setScene(startScene);
 		primaryStage.show();
 	}
 

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-
 import util.Message;
 
 
@@ -49,6 +48,14 @@ public class PlatinumClient {
 	
 	public boolean isConnected(){
 		return isConnected;
+	}
+	
+	public ObjectOutputStream getOutputStream() {
+		return toServer; 
+	}
+	
+	public ObjectInputStream getInputStream() {
+		return fromServer; 
 	}
 
 }
