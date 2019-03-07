@@ -41,7 +41,7 @@ public class PlatinumServer {
 
 		try {
 			
-			ss = new ServerSocket(portNumber, 6, InetAddress.getByName(hostName));
+			ss = new ServerSocket(portNumber);
 			System.out.println("Server is running and ready for connections!");
 			
 			while (shouldRun) {
