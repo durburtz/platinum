@@ -35,5 +35,9 @@ public class Message implements Serializable {
 		return object;
 	}
 	
+	public String toString() {
+		return header + " " + ", x = " + x + ", y = " + y + ", object = " + object; 
+	}
+	
 
 }
