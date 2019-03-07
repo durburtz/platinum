@@ -1,5 +1,6 @@
 package windows;
 
+import client.PlatinumClient;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +16,8 @@ import javafx.stage.Stage;
  */
 public class LoadingBox extends Application {
     
+	private PlatinumClient client = new PlatinumClient();
+	
     @Override
     public void start(Stage primaryStage) {
         Label connectLabel = new Label(); 
@@ -28,12 +31,13 @@ public class LoadingBox extends Application {
             @Override
             //connection event 
             public void handle(ActionEvent event) {
-                
+                client.connect("127.0.0.1", 1098);
             }
         });
         
 
-  
+        
+        
         connectLabel.relocate(-10, 0); 
         
         
