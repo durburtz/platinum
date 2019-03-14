@@ -4,23 +4,34 @@ import client.PlatinumClient;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
 import util.Message;
 
 public class DrawBox {
-	private Scene canvasScene;
+	private Scene cScene;
 	private PlatinumClient client;
-	Canvas canvas;
+	private Canvas canvas;
+	private GraphicsContext gc; 
 
 	public DrawBox(int x, int y, PlatinumClient pc) {
 
 		this.client = pc;
-
+		
+		
+		
 		Pane canvasPane = new Pane();
-		canvasScene = new Scene(canvasPane, x, y);
-
-		canvasScene.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+		
+		canvas = new Canvas(x, y);
+		gc = canvas.getGraphicsContext2D(); 
+		
+		canvasPane.getChildren().add(canvas);
+		cScene = new Scene(canvasPane, x, y);
+		cScene.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
 
@@ -37,7 +48,7 @@ public class DrawBox {
 			}
 		});
 
-		canvasScene.addEventHandler(MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent>() {
+		cScene.addEventHandler(MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
 
@@ -58,16 +69,43 @@ public class DrawBox {
 				
 				previousX = mouseEvent.getX();
 				previousY = mouseEvent.getY();
-
+				draw(previousX,previousY); 
 				
 				System.out.println("Previous = " + previousX + ", " + previousY);
 
 			}
 		});
+		
+		cScene.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() { 
+			   public void handle(MouseEvent mouseEvent) { 
+				     
+				   draw(mouseEvent.getX(), mouseEvent.getY());   
+				   
+				   } 
+			}); 
+			
+		
 	}
 
 	public Scene getScene() {
-		return canvasScene;
+		return cScene;
 	}
+	
+	public void draw(double x, double y) 
+	{
+		gc.setFill(Color.BLACK);
+		gc.fillRect(x, y, 3, 3);
+		Arc arc = new Arc();
+        /*arc.setCenterX(x);
+        arc.setCenterY(y);
+        arc.setRadiusX(25.0f);
+        arc.setRadiusY(25.0f);
+        arc.setStartAngle(45.0f);
+        arc.setLength(270.0f);
+        arc.setType(ArcType.ROUND);
+        gc.arc(arc);*/
+        
+	}
+	
 
 }
