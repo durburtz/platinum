@@ -12,6 +12,7 @@ public class PlatinumServer {
 	ServerSocket ss;
 	ServerThread st;
 	public boolean shouldRun = true; // boolean used to control run() method
+	private ServerDrawBox serverDrawBox = new ServerDrawBox(1200, 800); 
 
 	public static void main(String[] args) {
 
@@ -72,6 +73,10 @@ public class PlatinumServer {
 			System.out.println("ServerSocket has already been closed, OK to exit");
 		}
 
+	}
+	
+	public ServerDrawBox getServerDrawBox() {
+		return serverDrawBox; 
 	}
 
 

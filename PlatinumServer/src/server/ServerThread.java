@@ -16,8 +16,9 @@ public class ServerThread implements Runnable {
 
 	private Socket cs; // client socket
 	private PlatinumServer server;
-	Object readMessage;
-	Message castMessage;
+	private Object readMessage;
+	private Message castMessage;
+	private boolean clientHasBox = false;
 
 	public ServerThread(Socket cs, PlatinumServer server) {
 		this.cs = cs;
@@ -31,6 +32,13 @@ public class ServerThread implements Runnable {
 
 			ObjectInputStream fromClient = new ObjectInputStream(cs.getInputStream());
 			ObjectOutputStream toClient = new ObjectOutputStream(cs.getOutputStream());
+			
+			while (! clientHasBox) {
+				Message sendBox = new Message("ServerDrawBox", null, null, server.getServerDrawBox());
+				toClient.writeObject(sendBox);
+				toClient.flush();
+				clientHasBox = true;
+			}
 
 			while (true) {
 

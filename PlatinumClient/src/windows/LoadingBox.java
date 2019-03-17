@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import server.ServerDrawBox;
 
 
 /**
@@ -34,8 +35,9 @@ public class LoadingBox extends Application {
 					client.connect("127.0.0.1", 1098);
 
 					if (client.isConnected()) {
-
-						primaryStage.setScene(new DrawBox(1280, 750, client).getScene());
+												
+						primaryStage.setScene(client.getServerDrawBox().getServerDrawBoxScene());
+						//primaryStage.setScene(new DrawBox(1280, 750, client).getScene());
 					}
 				}
 				catch (Exception ex) {

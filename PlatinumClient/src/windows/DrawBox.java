@@ -52,10 +52,8 @@ public class DrawBox {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
 
-				double previousX;
-				double previousY;
-
-				System.out.println("Actual = " + mouseEvent.getX() + ", " + mouseEvent.getY());
+				
+				draw(mouseEvent.getX(),mouseEvent.getY());
 				
 				Message m = new Message("Draw", Double.toString(mouseEvent.getX()), Double.toString(mouseEvent.getY()),
 						"ree");
@@ -67,11 +65,10 @@ public class DrawBox {
 					ex.printStackTrace();
 				}
 				
-				previousX = mouseEvent.getX();
-				previousY = mouseEvent.getY();
-				draw(previousX,previousY); 
 				
-				System.out.println("Previous = " + previousX + ", " + previousY);
+				
+				
+				
 
 			}
 		});
@@ -105,6 +102,25 @@ public class DrawBox {
         arc.setType(ArcType.ROUND);
         gc.arc(arc);*/
         
+	}
+	
+	public void fillInGaps(double lastX, double lastY, double xNew, double yNew) {
+		double possX; 
+		double possY; 
+		double length; 
+		double height; 
+		
+		// if you have dragged up
+		if(lastX >= xNew) height = lastX - xNew; 
+		// if you have dragged down 
+		else height = xNew - lastX; 
+		// dragged towards left 
+		if(lastY >= yNew) length = lastY - yNew; 
+		// dragged towards right 
+		else length = yNew - lastY; 
+		
+		
+		//gc.fill(lastX, lastY, w, h);
 	}
 	
 

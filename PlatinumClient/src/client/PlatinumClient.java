@@ -4,8 +4,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import util.Message;
 
+import server.ServerDrawBox;
+import util.Message;
 
 public class PlatinumClient {
 
@@ -13,6 +14,8 @@ public class PlatinumClient {
 	private ObjectInputStream fromServer;
 	private Socket socket;
 	private boolean isConnected = false;
+	private boolean recivedServerDrawBox = false;
+	private ServerDrawBox serverDrawBox;
 
 	public PlatinumClient() {
 
@@ -31,27 +34,52 @@ public class PlatinumClient {
 			toServer.flush();
 
 			
+			while (! recivedServerDrawBox) {
+				
+
+				try {
+					Object readMessage = (fromServer.readObject());
+					Message castMessage = (Message) readMessage;
+					if (castMessage.getHeader().equals("ServerDrawBox")) {
+						serverDrawBox = (ServerDrawBox) castMessage.getObject();
+						recivedServerDrawBox = true;
+						System.out.println("Recived ServerDrawBox " + serverDrawBox);
+					}
+
+				} catch (ClassNotFoundException e) {
+
+				
+			}
+			
 			System.out.println("Connected!");
-
-			return true;
-
+			isConnected = true;
+			
+			}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
 
 		}
-	}
-	
-	public boolean isConnected(){
 		return isConnected;
 	}
-	
+		
+		
+
+	public boolean isConnected() {
+		return isConnected;
+	}
+
 	public ObjectOutputStream getOutputStream() {
-		return toServer; 
+		return toServer;
+	}
+
+	public ObjectInputStream getInputStream() {
+		return fromServer;
 	}
 	
-	public ObjectInputStream getInputStream() {
-		return fromServer; 
+	public ServerDrawBox getServerDrawBox() {
+		return serverDrawBox;
 	}
 
 }
